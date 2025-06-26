@@ -2,56 +2,61 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
 body {
     color: white;
     overflow-y: auto;
-    margin:0;
-    padding:0;
     font-family: sans-serif;
+    display : flex;
+    flex-direction: column; 
+    min-height : 100vh;
+    background-image: linear-gradient(to right bottom,#F24E1E, #FCD34D);
 }
-/*진입 페이지*/
+/*main content page*/
 #intro-screen {
-    background-color: blue;
+    position: fixed;        
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     color: red;
+    z-index: 99;          
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 1s ease;
 }
 
+
 #progress-bar-container {
-width: 80%;
-height: 20px;
-background-color: #ddd;
-border-radius: 10px;
-margin: 20px auto;
-overflow: hidden;
+    width: 80%;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 10px;
+    margin: 20px auto;
+    overflow: hidden;
+    transition: opacity 1s ease;
 }
 
 #progress-bar {
-height: 100%;
-width: 0%;
-background-color: orange;
-border-radius: 10px;
-transition: width 0.5s ease;
+    height: 100%;
+    width: 0%;
+    background-color: orange;
+    border-radius: 10px;
+    transition: width 0.5s ease;
 }
 
 #progress-percent-text {
-text-align: center;
-font-size: 18px;
-color: black;
-margin-top: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: black;
+    margin-top: 10px;
+    transition: opacity 1s ease;
 }
 
-#word-flow-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 500px;
-    background-image: linear-gradient(to right top,
-    #d16ba5,#c777b9, #ba83ca, 
-    #aa8fd8,#9a9ae1, #8aa7ec,
-    #79b3f4, #69bff8, #52cffe, 
-    #41dfff, #46eefa, #5ffbf1);
-}
 
 #word-flow-container {
     position: relative;
@@ -61,35 +66,65 @@ margin-top: 10px;
     margin: 0 auto;
     display:flex;
     justify-content: space-around;  
-    background-image: linear-gradient(to right top,
-    #d16ba5,#c777b9, #ba83ca, 
-    #aa8fd8,#9a9ae1, #8aa7ec,
-    #79b3f4, #69bff8, #52cffe, 
-    #41dfff, #46eefa, #5ffbf1);
+    flex-grow: 1;
 }
 
 .drop-target-left,
 .drop-target-right {
-    width: 15%;
+    position: absolute;
+    top: 0;
+    width: 250px;
     height: 100%;
-    color: #fff;
+    color: white;
     font-weight: bold;
     text-align: center;
-    line-height: 90%;
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     font-size: 16px;
     cursor: pointer;
+    padding: 10px 0;
+    border: 2px dashed #fff;
+    background: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+    z-index: 10;
 }
 
-#toggle-flow-btn {
-    margin-left: 20px;
-    padding: 6px 12px;
-    font-size: 14px;
-    cursor:pointer;
+.google-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+    width: 60px;  
+    height: auto;
+    pointer-events: none;
 }
 
-/*홈페이지*/
+.naver-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+    width: 200px; 
+    height: auto;
+    pointer-events: none;
+}
+
+.drop-target-left {
+    left:0;
+}
+
+.drop-target-right {
+    right:0;
+}
+
+.drop-target-left:hover,
+.drop-target-right:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+
 #main-content {
     position: relative;
 }
@@ -97,7 +132,6 @@ margin-top: 10px;
     position: absolute;
     white-space: nowrap;
     animation: drift 20s linear infinite;
-    pointer-events: none;
     line-height: 1.2;
 }
 
@@ -127,18 +161,54 @@ margin-top: 10px;
     display: flex;
     align-items: center;
     padding:0 20px;
+    background-color: #282828;
+    height:66px;
+}
+
+.navibar-right {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.navibar-right a {
+    display: block;
+    padding: 20px 30px;
+    color: white;
+    text-decoration: none;
     background-color: #333;
-    height:66px
+}
+.menu-items {
+    overflow: visible;
+}
+.menu-items ul {
+    margin-right: auto;
+    display: flex;
+    gap: 10px;
+}
+.menu-items ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    z-index: 10;
+    min-width: 160px;
+    flex-direction: column;
+}
+.menu-items li:hover > ul {
+    display: flex;
+}
+.navibar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
 }
 
 .category {
-font-size: 18px;
-
-}
-
-.navibar > ul {
-    list-style: none;
-    display: flex;
+    font-size: 18px;
 }
 
 .navibar li {
@@ -146,108 +216,111 @@ font-size: 18px;
 }
 
 .navibar a {
-display: block;
-padding: 20px 50px; 
-color: white;
-text-decoration: none;
-background-color: #333;
-height: 66px;
-border: 1 solid #333
+    display: block;
+    padding: 16px 30px; 
+    color: white;
+    text-decoration: none;
+    background-color: #333;
 }
 
 .navibar li:hover > a {
     background-color: #555;
 }
 
+#toggle-flow-btn {
+    margin: 20px;
+    padding: 6px 12px;
+    font-size: 14px;
+    cursor:pointer;
+}
 .filter-status {
     color: white;
     font-size: 14px;
     white-space: nowrap;
-    margin-left : 30px;
+    margin: 20px;
+    display: flex;
+    gap: 10px;
 }
 
-/* 내비게이션 로고*/
 .navibar_logo {
-float: left;
-width: 120px;
-
-cursor: pointer;
+    width: 120px;
+    cursor: pointer;
+    margin-right: auto;
 }
 
 .navibar_logo img {
     width: 100%;
     height: auto;
 }
-/*드롭다운 */
+
 .dropdown-content {
-padding:0;
-list-style: none;
-display: none;
-position: absolute;
-top: 100%;
-left: 0;
-background-color: #444;
-z-index: 10;
-margin-right : 50px;
-align-items: center;
-line-height: 1.5;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #444;
+    z-index: 10;
+    min-width: 160px;
+    flex-direction: column;
 }
 
 .dropdown-content li {
-position: relative;
-width: 180px;
-border-bottom: 1px solid #666;
+    border-bottom: 1px solid #666;
 }
 .dropdown-content li:last-child {
-border-bottom: none;  
+    border-bottom: none;  
 }
 
 .dropdown-content a {
     background-color: #444;
     padding: 12px 16px;
+    white-space: nowrap;
 }
 
 .dropdown-content a:hover {
-background-color: #5a5a5a;
-color: #fff;
+    background-color: #5a5a5a;
 }
 
 
-/* 드롭다운 작동 트리거 */
 .navibar li:hover > .dropdown-content {
-    display: block;
+    display: flex;
 }
 
 .bottom-container {
-height : 90px;
-display : flex;
-
+    position: relative;
+    height: 120px;
+    width: 100%;
+    background: transparent; 
 }
-.madeby{
-margin-left : 50px;
-padding : 30px;
-color: black;
+
+.madeby {
+    position: absolute;
+    margin: 40px;
+    left: 30px;
+    color: white;
+    font-size: 24px;
 }
 
 .bottom-feedback-link {
-text-decoration: none;     
-color: white;             
-transition: color 0.3s; 
-padding : 28px;
-margin-left: 1000px;
-font-size : 22px;
-
+    position: absolute;
+    bottom: 50px;
+    right: 70px;
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
 }
-/*feedback*/
+
+
+/*feedback page*/
+
 .feedback-container {
-    display : flex;
-    flex-direction: column; 
-    min-height : 100vh;
     background-image: linear-gradient(to right top,
     #d16ba5,#c777b9, #ba83ca, 
     #aa8fd8,#9a9ae1, #8aa7ec,
     #79b3f4, #69bff8, #52cffe, 
     #41dfff, #46eefa, #5ffbf1);
+
+    min-height : 100vh;
 }
 .welcome {
     text-shadow: 2px 3px 0px #898999;
@@ -262,7 +335,7 @@ font-size : 22px;
     text-decoration: none;
 }
 .email-link > a:hover {
-color: #2FFFAD;
+    color: #2FFFAD;
 }
 .introduce-container {
     font-size : 18px;
@@ -272,22 +345,24 @@ color: #2FFFAD;
 
 /*insta*/
 .insta-link {
-padding : 30px;
-text-decoration: none;     
-color: white;
-margin: 0 8px;               
-transition: color 0.3s;     
+    padding : 30px;
+    text-decoration: none;     
+    color: white;
+    margin: 0 8px;               
+    transition: color 0.3s;     
 }
 .insta-link:hover {
-color: #ffd700;
+    color: #ffd700;
 }
 
 .insta-container {
     margin-top:100px;
+    margin-bottom: 25px;
 }
 .insta-gradient {
     font-weight: bold;
-    background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+    background: linear-gradient(45deg, #feda75, #fa7e1e, 
+    #d62976, #962fbf, #4f5bd5);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     display: inline-block;
@@ -299,21 +374,17 @@ color: #ffd700;
 hr {
     border: none;
     border-top: 2px solid rgba(255, 255, 255, 0.44);
-    margin: 40px auto;
     display: block;
     width: 100%;
-    margin:20px 0 0 0;
     background-blend-mode: overlay;
 }
-
 .bottom-feedback-container {
-    display: flex;
-    justify-content: space-between;
-
+    height: auto;
+    display : flex;
 }
 .back {
     color : white;
     text-decoration: none;
-    margin: 45px;
-    font-size: 20px;
-}
+    margin: 40px 0 40px 50px;
+    font-size: 24px;
+}   
